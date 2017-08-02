@@ -122,3 +122,19 @@ $("#columnasSlide").on("drop", function(e){
 
 /*=====  End of SOLTAR IMAGEN  ======*/
 
+
+
+/*===========================================
+=            ELIMINAR ITEM SLIDE            =
+===========================================*/
+
+
+$(".eliminarSlide").click(function() {
+	
+	idSlide = $(this).parent().attr("id");
+	console.log("idSlide", idSlide);
+});
+
+/*=====  End of ELIMINAR ITEM SLIDE  ======*/
+
+

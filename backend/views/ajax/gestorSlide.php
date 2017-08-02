@@ -41,3 +41,4 @@ $a -> imagenTemporal = $_FILES["imagen"]["tmp_name"];
 $a -> gestorSlideAjax();
 
 /*=====  End of OBJETOS  ======*/
+

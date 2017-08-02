@@ -62,7 +62,7 @@ class GestorSlideModel{
 	
 	public function mostrarImagenVistaModel($tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT ruta, titulo, descripcion FROM $tabla ORDER BY orden ASC");
+		$stmt = Conexion::conectar()->prepare("SELECT id, ruta, titulo, descripcion FROM $tabla ORDER BY orden ASC");
 
 		$stmt -> execute();
 

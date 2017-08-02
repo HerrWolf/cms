@@ -24,20 +24,26 @@ class GestorSlide{
 			$aleatorio = mt_rand(100, 999);
 			
 			$ruta = "../../views/images/slide/slide".$aleatorio.".jpg";
-			
+
 			#imagecreatefromjpeg() - crea una nueva imagen apartir de un fichero o una URL
 
 			$origen = imagecreatefromjpeg($datos["imagenTemporal"]);
 
+			#imagecrop() - Recortando una imagen usando las coordenadas, el tamaño, x, y, ancho y alto dados
+
+			$destino = imagecrop($origen, ["x"=>0, "y"=>0, "width"=>1600, "height"=>600]);
+			
 			#imagejpeg() - exporta la imagen al navegador o a un fichero
 
-			imagejpeg($origen, $ruta);
+			imagejpeg($destino, $ruta);
 
 			GestorSlideModel::subirImagenSlideModel($ruta, "slide");
 
 			$respuesta = GestorSlideModel::mostrarImagenSlideModel($ruta,"slide");
 
-			$enviarDatos = array("ruta" => $respuesta["ruta"]);
+			$enviarDatos = array("ruta" => $respuesta["ruta"],
+				                 "titulo" => $respuesta["titulo"],
+				                 "descripcion" => $respuesta["descripcion"]);
 
 			echo json_encode($enviarDatos);
 		}
@@ -60,7 +66,7 @@ class GestorSlide{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li class="bloqueSlide"><span class="fa fa-times"></span><img src="'.substr($item["ruta"],6).'" class="handleImg"></li>';
+			echo '<li id="'.$item["id"].'" class="bloqueSlide"><span class="fa fa-times eliminarSlide"></span><img src="'.substr($item["ruta"],6).'" class="handleImg"></li>';
 		}
 
 	}
