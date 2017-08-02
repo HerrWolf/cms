@@ -72,6 +72,35 @@ class GestorSlideModel{
 	}
 
 	/*=====  End of MOSTRAR IMAGENES EN VIEWS  ======*/
+
+
+
+	/*===============================================
+	=            ELIMINAR ITEM DEL SLIDE            =
+	===============================================*/
+	
+	
+	public function eliminarSlideModel($datos, $tabla){
+		
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos["idSlide"], PDO::PARAM_STR);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();
+	}
+	
+	/*=====  End of ELIMINAR ITEM DEL SLIDE  ======*/
+	
 	
 	
 }

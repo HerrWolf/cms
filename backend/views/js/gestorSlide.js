@@ -131,8 +131,33 @@ $("#columnasSlide").on("drop", function(e){
 
 $(".eliminarSlide").click(function() {
 	
+	// eliminar item en la vista
 	idSlide = $(this).parent().attr("id");
-	console.log("idSlide", idSlide);
+	$(this).parent().remove();
+	$("#item"+idSlide).remove();
+
+	//eliminar item en base de datos con ajax
+	var borrarItem = new FormData();
+
+	borrarItem.append("idSlide", idSlide);
+
+	$.ajax({
+
+		url: 'views/ajax/gestorSlide.php',
+		type: 'POST',
+		data: borrarItem,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta){
+			console.log("respuesta", respuesta);
+
+
+		}
+
+
+	});
+	
 });
 
 /*=====  End of ELIMINAR ITEM SLIDE  ======*/

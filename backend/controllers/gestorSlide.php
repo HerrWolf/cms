@@ -86,11 +86,26 @@ class GestorSlide{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li><span class="fa fa-pencil" style="background:blue"></span><img src="'.substr($item["ruta"],6).'" style="float:left; margin-bottom:10px" width="80%"><h1>'.substr($item["titulo"],6).'</h1><p>'.substr($item["descripcion"],6).'</p></li>';
+			echo '<li id="item'.$item["id"].'"><span class="fa fa-pencil" style="background:blue"></span><img src="'.substr($item["ruta"],6).'" style="float:left; margin-bottom:10px" width="80%"><h1>'.substr($item["titulo"],6).'</h1><p>'.substr($item["descripcion"],6).'</p></li>';
 		}
 	}
 	
 	/*=====  End of MOSTRAR IMAGENES PARA EDITAR  ======*/
+
+
+
+	/*===============================================
+	=            ELIMINAR ITEM DEL SLIDE            =
+	===============================================*/
+	
+	
+	public function eliminarSlideController($datos){
+
+		$respuesta = GestorSlideModel::eliminarSlideModel($datos,"slide");
+	}
+	
+	/*=====  End of ELIMINAR ITEM DEL SLIDE  ======*/
+	
 	
 	
 }
