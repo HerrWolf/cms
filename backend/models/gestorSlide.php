@@ -100,6 +100,60 @@ class GestorSlideModel{
 	}
 	
 	/*=====  End of ELIMINAR ITEM DEL SLIDE  ======*/
+
+
+
+	/*=============================================
+	=            ACTUALIZAR ITEM SLIDE            =
+	=============================================*/
+	
+	
+	public function actualizarSlideModel($datos,$tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo, descripcion = :descripcion WHERE id = :id ");
+
+		$stmt -> bindParam(":titulo", $datos["enviarTitulo"], PDO::PARAM_STR);
+		$stmt -> bindParam(":descripcion", $datos["enviarDescripcion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["enviarId"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();	
+	}
+	
+	/*=====  End of ACTUALIZAR ITEM SLIDE  ======*/
+
+
+
+	/*============================================================
+	=            SELECCIONAR ACTUALIZACION ITEM SLIDE            =
+	============================================================*/
+	
+	
+	public function seleccionarActualizacionSlideModel($datos, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT titulo, descripcion FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos["enviarId"], PDO::PARAM_INT);
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of SELECCIONAR ACTUALIZACION ITEM SLIDE  ======*/
+	
+	
 	
 	
 	

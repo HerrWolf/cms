@@ -86,7 +86,7 @@ class GestorSlide{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li id="item'.$item["id"].'"><span class="fa fa-pencil" style="background:blue"></span><img src="'.substr($item["ruta"],6).'" style="float:left; margin-bottom:10px" width="80%"><h1>'.substr($item["titulo"],6).'</h1><p>'.substr($item["descripcion"],6).'</p></li>';
+			echo '<li id="item'.$item["id"].'"><span class="fa fa-pencil editarSlide" style="background:blue"></span><img src="'.substr($item["ruta"],6).'" style="float:left; margin-bottom:10px" width="80%"><h1>'.$item["titulo"].'</h1><p>'.$item["descripcion"].'</p></li>';
 		}
 	}
 	
@@ -107,6 +107,27 @@ class GestorSlide{
 	}
 	
 	/*=====  End of ELIMINAR ITEM DEL SLIDE  ======*/
+
+
+
+	/*=============================================
+	=            ACTUALIZAR ITEM SLIDE            =
+	=============================================*/
+	
+	
+	public function actualizarSlideController($datos){
+
+		GestorSlideModel::actualizarSlideModel($datos,"slide");
+		$respuesta = GestorSlideModel::seleccionarActualizacionSlideModel($datos,"slide");
+
+		$enviarDatos = array("titulo" => $respuesta["titulo"],
+				             "descripcion" => $respuesta["descripcion"]);
+
+		echo json_encode($enviarDatos);
+	}
+	
+	/*=====  End of ACTUALIZAR ITEM SLIDE  ======*/
+	
 	
 	
 	

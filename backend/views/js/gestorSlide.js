@@ -144,6 +144,12 @@ $("#columnasSlide").on("drop", function(e){
 
 
 $(".eliminarSlide").click(function() {
+
+	//Regresando el area de carga de imagenes a un tamaño de 100px cuando se quede vacia
+	if ($(".eliminarSlide").length == 1){
+
+		$("#columnasSlide").css({"height":"100px"});
+	}
 	
 	// eliminar item en la vista
 	idSlide = $(this).parent().attr("id");
@@ -178,5 +184,69 @@ $(".eliminarSlide").click(function() {
 });
 
 /*=====  End of ELIMINAR ITEM SLIDE  ======*/
+
+
+
+/*=========================================
+=            EDITAR ITEM SLIDE            =
+=========================================*/
+
+
+$(".editarSlide").click(function(){
+
+	idSlide = $(this).parent().attr("id");
+	rutaImagen = $(this).parent().children("img").attr("src");
+	rutaTitulo = $(this).parent().children("h1").html();
+	rutaDescripcion = $(this).parent().children("p").html();
+	
+	$(this).parent().html('<img src="'+rutaImagen+'" class="img-thumbnail"><input type="text" class="form-control" placeholder="Título" value="'+rutaTitulo+'" id="enviarTitulo"><textarea row="5" class="form-control" placeholder="Descripción" id="enviarDescripcion">'+rutaDescripcion+'</textarea><button class="btn btn-info pull-right" style="margin:10px" id="guardar'+idSlide+'">Guardar</button>');
+
+	$("#guardar"+idSlide).click(function (){
+		
+		enviarId = idSlide.slice(4);
+		
+		enviarTitulo = $("#enviarTitulo").val();
+		enviarDescripcion = $("#enviarDescripcion").val();
+
+		var actualizarSlide = new FormData();
+
+		actualizarSlide.append("enviarId",enviarId);
+		actualizarSlide.append("enviarTitulo",enviarTitulo);
+		actualizarSlide.append("enviarDescripcion",enviarDescripcion);
+
+		$.ajax({
+
+			url: 'views/ajax/gestorSlide.php',
+			type: 'POST',
+			data: actualizarSlide,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "json",
+			success: function(respuesta){
+				
+				$("#guardar"+idSlide).parent().html('<span class="fa fa-pencil editarSlide" style="background:blue"></span><img src="'+rutaImagen+'" style="float:left; margin-bottom:10px" width="80%"><h1>'+respuesta["titulo"]+'</h1><p>'+respuesta["descripcion"]+'</p>');
+
+				swal({
+						title: "¡OK!",
+						text: "¡Se han guarado los cambios correctamente!",
+						type: "success",
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false
+					},
+
+					function(isConfirm){
+						if(isConfirm){
+							window.location = "slide";
+						}
+					});
+
+			}
+		});
+	});
+});
+
+/*=====  End of EDITAR ITEM SLIDE  ======*/
+
 
 
