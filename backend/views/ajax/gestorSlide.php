@@ -27,10 +27,12 @@ class Ajax{
 
 	#Eliminar item slide
 	public $idSlide;
+	public $rutaSlide;
 
 	public function eliminarSlideAjax(){
 
-		$datos = array("idSlide"=>$this->idSlide);
+		$datos = array("idSlide"=>$this->idSlide,
+			           "rutaSlide"=>$this->rutaSlide);
 
 		$respuesta =GestorSlide::eliminarSlideController($datos);
 
@@ -59,6 +61,7 @@ if (isset($_POST["idSlide"])) {
 	
 	$b = new Ajax();
 	$b -> idSlide = $_POST["idSlide"];
+	$b -> rutaSlide = $_POST["rutaSlide"];
 	$b -> eliminarSlideAjax();
 }
 

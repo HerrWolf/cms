@@ -66,7 +66,7 @@ class GestorSlide{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li id="'.$item["id"].'" class="bloqueSlide"><span class="fa fa-times eliminarSlide"></span><img src="'.substr($item["ruta"],6).'" class="handleImg"></li>';
+			echo '<li id="'.$item["id"].'" class="bloqueSlide"><span class="fa fa-times eliminarSlide" ruta="'.$item["ruta"].'"></span><img src="'.substr($item["ruta"],6).'" class="handleImg"></li>';
 		}
 
 	}
@@ -102,6 +102,8 @@ class GestorSlide{
 	public function eliminarSlideController($datos){
 
 		$respuesta = GestorSlideModel::eliminarSlideModel($datos,"slide");
+
+		unlink($datos["rutaSlide"]);
 	}
 	
 	/*=====  End of ELIMINAR ITEM DEL SLIDE  ======*/

@@ -107,7 +107,21 @@ $("#columnasSlide").on("drop", function(e){
 
 					$("#columnasSlide").append('<li class="bloqueSlide"><span class="fa fa-times"></span><img src="'+respuesta["ruta"].slice(6)+'" class="handleImg"></li>');
 
-					$("#ordenarTextSlide").append('<li><span class="fa fa-pencil" style="background:blue"></span><img src="'+respuesta["ruta"].slice(6)+'" style="float:left; margin-bottom:10px" width="80%"><h1>'+respuesta["titulo"]+'</h1><p>'+respuesta["descripcion"]+'</p></li>')
+					$("#ordenarTextSlide").append('<li><span class="fa fa-pencil" style="background:blue"></span><img src="'+respuesta["ruta"].slice(6)+'" style="float:left; margin-bottom:10px" width="80%"><h1>'+respuesta["titulo"]+'</h1><p>'+respuesta["descripcion"]+'</p></li>');
+
+					swal({
+						title: "¡OK!",
+						text: "¡La imagen se subio corectamente!",
+						type: "success",
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false
+					},
+
+					function(isConfirm){
+						if(isConfirm){
+							window.location = "slide";
+						}
+					});
 				}
 
 			}
@@ -133,6 +147,8 @@ $(".eliminarSlide").click(function() {
 	
 	// eliminar item en la vista
 	idSlide = $(this).parent().attr("id");
+	rutaSlide = $(this).attr("ruta");
+
 	$(this).parent().remove();
 	$("#item"+idSlide).remove();
 
@@ -140,6 +156,7 @@ $(".eliminarSlide").click(function() {
 	var borrarItem = new FormData();
 
 	borrarItem.append("idSlide", idSlide);
+	borrarItem.append("rutaSlide", rutaSlide);
 
 	$.ajax({
 
