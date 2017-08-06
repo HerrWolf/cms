@@ -149,6 +149,28 @@ class GestorSlide{
 	/*=====  End of ACTUALIZAR ORDEN  ======*/
 	
 	
+	/*================================================
+	=            MOSTRAR SLIDE EN BACKEND            =
+	================================================*/
+	
+	
+	public function seleccionarSlideController(){
+		
+		$respuesta = GestorSlideModel::seleccionarSlideModel("slide");
+
+		foreach ($respuesta as $row => $item) {
+			
+			echo '<li>
+	           		  <img src="'.substr($item["ruta"],6).'">
+	           	      <div class="slideCaption">
+		           		  <h3>'.$item["titulo"].'</h3>
+				   		  <p>'.$item["descripcion"].'</p>
+	           	      </div>
+                  </li>';
+		}
+	}
+	
+	/*=====  End of MOSTRAR SLIDE EN BACKEND  ======*/
 	
 	
 	
