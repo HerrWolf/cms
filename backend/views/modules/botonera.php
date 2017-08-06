@@ -44,6 +44,8 @@
 
 				</nav>
 
+				<a href="../index.php" target="_blank"><button type="button" class="btn btn-primary">Ver Sitio</button></a>
+
 			</div>
 
 		<!--====  FIn de COLUMNA BOTONERA  ====-->

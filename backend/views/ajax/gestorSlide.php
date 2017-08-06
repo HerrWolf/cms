@@ -119,7 +119,7 @@ if (isset($_POST["enviarId"])) {
 	$c -> actualizarSlideAjax();
 }
 
-if (isset($_POST["idSlide"])) {
+if (isset($_POST["actualizarOrdenSlide"])) {
 	
 	$d = new Ajax();
 	$d -> actualizarOrdenSlide = $_POST["actualizarOrdenSlide"];

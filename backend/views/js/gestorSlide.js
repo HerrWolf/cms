@@ -281,7 +281,7 @@ $("#ordenarSlide").click(function(){
 
 			for (var i=0; i < $("#columnasSlide li").length; i++) {
 				almacenarOrdenId[i] = event.target.children[i].id;
-				ordenItem[i] = i+1
+				ordenItem[i] = i+1;
 				
 			}
 		}
@@ -298,7 +298,7 @@ $("#guardarSlide").click(function(){
 	for (var i=0; i < $("#columnasSlide li").length; i++) {
 
 		var actualizarOrden = new FormData();
-		actualizarOrden.append("actualizarOrden", almacenarOrdenId[i]);
+		actualizarOrden.append("actualizarOrdenSlide", almacenarOrdenId[i]);
 		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
 
 		$.ajax({
@@ -310,8 +310,22 @@ $("#guardarSlide").click(function(){
 			contentType: false,
 			processData: false,
 			success: function(respuesta){
-
 				
+				$("#textoSlide ul").html(respuesta);
+
+				swal({
+						title: "¡OK!",
+						text: "¡El orden se ha actualizaco correctamente!",
+						type: "success",
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false
+					},
+
+					function(isConfirm){
+						if(isConfirm){
+							window.location = "slide";
+						}
+					});				
 			}
 		})
 	}

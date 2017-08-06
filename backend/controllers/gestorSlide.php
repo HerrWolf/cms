@@ -138,6 +138,12 @@ class GestorSlide{
 	public function actualizarOrdenController($datos){
 		
 		GestorSlideModel::actualizarOrdenModel($datos, "slide");
+		
+		$respuesta = GestorSlideModel::seleccionarOrdenModel("slide");
+
+		foreach ($respuesta as $row => $item) {
+			echo '<li id="item'.$item["id"].'"><span class="fa fa-pencil editarSlide" style="background:blue"></span><img src="'.substr($item["ruta"],6).'" style="float:left; margin-bottom:10px" width="80%"><h1>'.$item["titulo"].'</h1><p>'.$item["descripcion"].'</p></li>';
+		}
 	}
 	
 	/*=====  End of ACTUALIZAR ORDEN  ======*/

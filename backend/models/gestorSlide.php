@@ -160,13 +160,12 @@ class GestorSlideModel{
 	========================================*/
 	
 	
-	public function actualizarordenModel($datos,$tabla){
+	public function actualizarOrdenModel($datos, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo, descripcion = :descripcion WHERE id = :id ");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
 
-		$stmt -> bindParam(":titulo", $datos["enviarTitulo"], PDO::PARAM_STR);
-		$stmt -> bindParam(":descripcion", $datos["enviarDescripcion"], PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $datos["enviarId"], PDO::PARAM_INT);
+		$stmt -> bindParam(":orden", $datos["ordenItem"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["ordenSlide"], PDO::PARAM_INT);
 
 		if ($stmt->execute()) {
 			
@@ -182,6 +181,27 @@ class GestorSlideModel{
 	}
 	
 	/*=====  End of ACTUALIZAR ORDEN  ======*/
+
+
+
+	/*=========================================
+	=            SELECCIONAR ORDEN            =
+	=========================================*/
+	
+	
+	public function seleccionarOrdenModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT id, ruta, titulo, descripcion FROM $tabla ORDER BY orden ASC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of SELECCIONAR ORDEN  ======*/
+	
 	
 	
 	
