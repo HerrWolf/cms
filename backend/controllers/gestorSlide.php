@@ -127,6 +127,21 @@ class GestorSlide{
 	}
 	
 	/*=====  End of ACTUALIZAR ITEM SLIDE  ======*/
+
+
+
+	/*========================================
+	=            ACTUALIZAR ORDEN            =
+	========================================*/
+	
+	
+	public function actualizarOrdenController($datos){
+		
+		GestorSlideModel::actualizarOrdenModel($datos, "slide");
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN  ======*/
+	
 	
 	
 	

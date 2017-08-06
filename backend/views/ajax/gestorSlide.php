@@ -61,6 +61,29 @@ class Ajax{
 	
 	/*=====  End of ACTUALIZAR ITEM SLIDE  ======*/
 
+
+
+	/*========================================
+	=            ACTUALIZAR ORDEN            =
+	========================================*/
+	
+	
+	public $actualizarOrdenSlide;
+	public $actualizarOrdenItem;
+
+	public function actualizarOrdenAjax(){
+		
+		$datos = array("ordenSlide"=>$this->actualizarOrdenSlide,
+			           "ordenItem"=>$this->actualizarOrdenItem);
+
+		$respuesta = GestorSlide::actualizarOrdenController($datos);
+
+		echo $respuesta;
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN  ======*/
+	
+
 }
 
 /*=====  End of CLASE Y METODOS  ======*/
@@ -94,6 +117,14 @@ if (isset($_POST["enviarId"])) {
 	$c -> enviarTitulo = $_POST["enviarTitulo"];
 	$c -> enviarDescripcion = $_POST["enviarDescripcion"];
 	$c -> actualizarSlideAjax();
+}
+
+if (isset($_POST["idSlide"])) {
+	
+	$d = new Ajax();
+	$d -> actualizarOrdenSlide = $_POST["actualizarOrdenSlide"];
+	$d -> actualizarOrdenItem = $_POST["actualizarOrdenItem"];
+	$d -> actualizarOrdenAjax();
 }
 
 /*=====  End of OBJETOS  ======*/

@@ -250,3 +250,76 @@ $(".editarSlide").click(function(){
 
 
 
+/*=====================================
+=            ORDENAR SLIDE            =
+=====================================*/
+
+var almacenarOrdenId = new Array();
+var ordenItem = new Array();
+
+$("#ordenarSlide").click(function(){
+
+	//ocultar boton ordenar
+	$("#ordenarSlide").hide();
+	//mostrar boton guardar
+	$("#guardarSlide").show();
+
+	// cambiar el cursor a mover despues de dar click en el boton ordenar
+	$("#columnasSlide").css({"cursor":"move"});
+	//ocultar los span de eliminar imagen
+	$("#columnasSlide span").hide();
+
+	//iniciamos la funcion sortable de jqquery UI
+	$("#columnasSlide").sortable({
+		//esto sirve para que la imagen regrese si se pone en un lugar no valido
+		revert: true,
+		//esto sirve para que la imagen se enganche a una posicion en el <li>
+		connectWith: ".bloqueSlide",
+		//esto sirve para poder arrastar la imagen
+		handle: ".handleImg",
+		stop: function(event){
+
+			for (var i=0; i < $("#columnasSlide li").length; i++) {
+				almacenarOrdenId[i] = event.target.children[i].id;
+				ordenItem[i] = i+1
+				
+			}
+		}
+	});
+});
+
+$("#guardarSlide").click(function(){
+
+	//ocultar boton guardar
+	$("#guardarSlide").hide();
+	//mostrar boton ordenar
+	$("#ordenarSlide").show();
+
+	for (var i=0; i < $("#columnasSlide li").length; i++) {
+
+		var actualizarOrden = new FormData();
+		actualizarOrden.append("actualizarOrden", almacenarOrdenId[i]);
+		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+
+		$.ajax({
+
+			url: 'views/ajax/gestorSlide.php',
+			type: 'POST',
+			data: actualizarOrden,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(respuesta){
+
+				
+			}
+		})
+	}
+
+});
+
+/*=====  End of ORDENAR SLIDE  ======*/
+	
+
+
+

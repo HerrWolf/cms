@@ -152,6 +152,37 @@ class GestorSlideModel{
 	}
 	
 	/*=====  End of SELECCIONAR ACTUALIZACION ITEM SLIDE  ======*/
+
+
+
+	/*========================================
+	=            ACTUALIZAR ORDEN            =
+	========================================*/
+	
+	
+	public function actualizarordenModel($datos,$tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo, descripcion = :descripcion WHERE id = :id ");
+
+		$stmt -> bindParam(":titulo", $datos["enviarTitulo"], PDO::PARAM_STR);
+		$stmt -> bindParam(":descripcion", $datos["enviarDescripcion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["enviarId"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();	
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN  ======*/
+	
 	
 	
 	
