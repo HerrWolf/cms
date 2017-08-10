@@ -47,7 +47,7 @@ $("#subirFoto").change(function () {
 
 		datos.append("imagen", imagen);
 
-		$ajax({
+		$.ajax({
 
 			url: "views/ajax/gestorArticulos.php",
 			method: "POST",
@@ -57,10 +57,19 @@ $("#subirFoto").change(function () {
 			processData: false,
 			beforeSend: function(){
 				
-				$("#arrastreImagenArticulo").before('<img src="views/images/status.gif" id="status">');
+				$("#arrastreImagenArticulo").before('<img src="../views/images/status.gif" id="status">');
 			},
 			success: function(respuesta){
-				console.log("respuesta", respuesta);
+				$("#status").remove();
+
+				if (respuesta ==0){
+
+					$("#arrastreImagenArticulo").before('<div class="alert alert-warning alerta text-center">La imagen es inferior a 800px * 400px</div>');
+				}
+				else{
+
+					$("#arrastreImagenArticulo").html('<div id="imagenArticulo"><img src="'+respuesta.slice(6)+'" class="img-thumbnail"></div>');
+				}	
 
 				
 			}
