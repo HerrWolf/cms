@@ -35,6 +35,11 @@ class GestorArticulos{
 
 
 
+	/*===============================================
+	=            GUARDAR ARTICULOS EN DB            =
+	===============================================*/
+	
+		
 	public function guardarArticuloController(){
 		
 		if (isset($_POST["tituloArticulo"])) {
@@ -62,7 +67,7 @@ class GestorArticulos{
 			imagejpeg($destino, $ruta);
 
 			$datosController = array("titulo"=>$_POST["tituloArticulo"],
-				                     "introduccion"=>$_POST["introArticulo"],
+				                     "introduccion"=>$_POST["introArticulo"]."...",
 				                     "ruta"=>$ruta,
 				                     "contenido"=>$_POST["contenidoArticulo"]);
 
@@ -82,7 +87,7 @@ class GestorArticulos{
 
 						function(isConfirm){
 							if(isConfirm){
-								window.location = "slide";
+								window.location = "articulos";
 							}
 						});
 				
@@ -95,4 +100,68 @@ class GestorArticulos{
 
 		}
 	}
+
+	/*=====  End of GUARDAR ARTICULOS EN DB  ======*/
+
+
+
+	/*=================================================
+	=            MOSTRAR ARTICULOS EN VIEW            =
+	=================================================*/
+	
+	
+	public function mostrarArticulosController(){
+		
+		$respuesta = GestorArticulosModel::mostrarArticulosModel("articulos");
+
+		foreach ($respuesta as $row => $item) {
+			
+			echo '<li>
+					<span>
+					<i class="fa fa-times btn btn-danger"></i>
+					<i class="fa fa-pencil btn btn-primary"></i>	
+					</span>
+					<img src="'.$item["ruta"].'" class="img-thumbnail">
+					<h1>'.$item["titulo"].'</h1>
+					<p>'.$item["introduccion"].'</p>
+					<a href="#articulo'.$item["id"].'" data-toggle="modal">
+					<button class="btn btn-default">Leer Más</button>
+					</a>
+
+					<hr>
+
+				</li>
+
+				<div id="articulo'.$item["id"].'" class="modal fade">
+
+					<div class="modal-dialog modal-content">
+
+						<div class="modal-header" style="border:1px solid #eee">
+				        
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title">'.$item["titulo"].'</h3>
+					        
+						</div>
+
+						<div class="modal-body" style="border:1px solid #eee">
+					        
+							<img src="'.$item["ruta"].'" width="100%" style="margin-bottom:20px">
+							<p class="parrafoContenido">'.$item["contenido"].'</p>
+					        
+						</div>
+
+						<div class="modal-footer" style="border:1px solid #eee">
+					        
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        
+						</div>
+
+					</div>
+
+				</div>';
+		}
+	}
+	
+	/*=====  End of MOSTRAR ARTICULOS EN VIEW  ======*/
+				
 }

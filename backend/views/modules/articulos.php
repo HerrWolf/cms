@@ -61,6 +61,13 @@ ARTÍCULOS ADMINISTRABLE
 
 	<ul id="editarArticulo">
 
+		<?php
+
+		$mostrarArticulo = new GestorArticulos();
+		$mostrarArticulo ->mostrarArticulosController();
+
+		?>
+
 		<!-- <li>
 			<span>
 			<i class="fa fa-times btn btn-danger"></i>

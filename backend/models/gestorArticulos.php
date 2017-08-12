@@ -32,5 +32,26 @@ class GestorArticulosModel{
 	}
 	
 	/*=====  End of GUARDAR ARTICULO EN DB  ======*/
+
+
+
+	/*=================================================
+	=            MOSTRAR ARTICULOS EN VIEW            =
+	=================================================*/
+	
+	
+	public function mostrarArticulosModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT id, titulo, introduccion, ruta, contenido FROM $tabla ORDER BY orden ASC");
+		
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of MOSTRAR ARTICULOS EN VIEW  ======*/
+	
 	
 }
