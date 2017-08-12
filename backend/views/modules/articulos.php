@@ -28,9 +28,9 @@ ARTÍCULOS ADMINISTRABLE
 
 		<form method="post" enctype="multipart/form-data">
 
-			<input type="text" placeholder="Título del Artículo" class="form-control">
+			<input type="text" placeholder="Título del Artículo" class="form-control" name="tituloArticulo" required>
 
-			<textarea name="" id="" cols="30" rows="5" placeholder="Introducción del Articulo" class="form-control" maxlength="169"></textarea>
+			<textarea name="introArticulo" id="" cols="30" rows="5" placeholder="Introducción del Articulo" class="form-control" maxlength="169" required></textarea>
 
 			<input type="file" name="imagen" class="btn btn-default" id="subirFoto" required>
 
@@ -40,13 +40,20 @@ ARTÍCULOS ADMINISTRABLE
 				<!-- <div id="imagenArticulo"><img src="views/images/articulos/landscape01.jpg" class="img-thumbnail"></div> -->
 			</div>
 
-			<textarea name="" id="" cols="30" rows="10" placeholder="Contenido del Articulo" class="form-control"></textarea>
+			<textarea name="contenidoArticulo" id="" cols="30" rows="10" placeholder="Contenido del Articulo" class="form-control" required></textarea>
 
 			<input type="submit" id="guardarArticulo" class="btn btn-primary" value="Guardar Artículo"></input>
 
 		</form>
 
 	</div>
+
+	<?php
+
+		$crearArticulo = new GestorArticulos();
+		$crearArticulo ->guardarArticuloController();
+
+	?>
 
 	<hr>
 
