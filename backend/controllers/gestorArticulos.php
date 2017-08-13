@@ -118,7 +118,7 @@ class GestorArticulos{
 			
 			echo '<li>
 					<span>
-					<i class="fa fa-times btn btn-danger"></i>
+					<a href="index.php?action=articulos&idBorrar='.$item["id"].'&rutaImagen='.$item["ruta"].'"><i class="fa fa-times btn btn-danger"></i></a>
 					<i class="fa fa-pencil btn btn-primary"></i>	
 					</span>
 					<img src="'.$item["ruta"].'" class="img-thumbnail">
@@ -163,5 +163,49 @@ class GestorArticulos{
 	}
 	
 	/*=====  End of MOSTRAR ARTICULOS EN VIEW  ======*/
+
+
+
+	/*============================================
+	=            BORRAR ATICULO DE DB            =
+	============================================*/
+	
+	
+	public function borrarArticuloController(){
+		
+		if (isset($_GET["idBorrar"])) {
+			
+			unlink($_GET["rutaImagen"]);
+
+			$datosController = $_GET["idBorrar"];
+
+			$respuesta = GestorArticulosModel::borrarArticuloModel($datosController,"articulos");
+
+			if ($respuesta == "ok") {
+				
+				echo '<script>
+
+						swal({
+							title: "¡OK!",
+							text: "¡El articulo se a borrado correctamente!",
+							type: "success",
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+							},
+
+						function(isConfirm){
+							if(isConfirm){
+								window.location = "articulos";
+							}
+						});
+				
+					 </script>';
+			}
+			
+		}
+	}
+	
+	/*=====  End of BORRAR ATICULO DE DB  ======*/
+
 				
 }

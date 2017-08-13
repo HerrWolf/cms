@@ -65,6 +65,7 @@ ARTÍCULOS ADMINISTRABLE
 
 		$mostrarArticulo = new GestorArticulos();
 		$mostrarArticulo ->mostrarArticulosController();
+		$mostrarArticulo ->borrarArticuloController();
 
 		?>
 

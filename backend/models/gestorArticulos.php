@@ -52,6 +52,35 @@ class GestorArticulosModel{
 	}
 	
 	/*=====  End of MOSTRAR ARTICULOS EN VIEW  ======*/
+
+
+
+	/*=============================================
+	=            BORRAR ARTICULO DE DB            =
+	=============================================*/
+	
+	public function borrarArticuloModel($datosModel, $tabla){
+		
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datosModel, PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();
+	}
+
+	
+	/*=====  End of BORRAR ARTICULO DE DB  ======*/
+	
 	
 	
 }
