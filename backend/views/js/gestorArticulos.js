@@ -80,3 +80,32 @@ $("#subirFoto").change(function () {
 
 
 /*=====  End of SUBIR IMAGEN A TRAVES DEL INPUT  ======*/
+
+
+
+/*=======================================
+=            EDITAR ARTICULO            =
+=======================================*/
+
+
+$(".editarArticulo").click(function(){
+	
+	idArticulo = $(this).parent().parent().attr("id");
+	rutaImagen = $("#"+idArticulo).children("img").attr("src");
+	titulo = $("#"+idArticulo).children("h1").html();
+	introduccion = $("#"+idArticulo).children("p").html();
+	contenido = $("#"+idArticulo).children("input").val();	
+	
+	$("#"+idArticulo).html('<form method="post" enctype="multipart/form-data"><span><button class="btn btn-primary pull-right">Guardar</button></span><div id="editarImagen"><input style="display:none" type="file" id="subirNuevaFoto" class="btn btn-default" style="color:transparent"><div id="nuevaFoto"><span class="fa fa-times cambiarImagen"></span><img src="'+rutaImagen+'" class="img-thumbnail"></div></div><input type="text" value="'+titulo+'" name="editarTitulo"><textarea cols="30" rows="5" name="editarIntroduccion">'+introduccion+'</textarea><textarea name="editarContenido" id="editarContenido" cols="30" rows="10">'+contenido+'</textarea><hr></form>')
+
+	$(".cambiarImagen").click(function(){
+
+		$(this).hide();
+		
+		$("#subirNuevaFoto").show();
+		$("#subirNuevaFoto").css({"width":"90%"});
+		$("#nuevaFoto").html("");
+	})
+})
+
+/*=====  End of EDITAR ARTICULO  ======*/

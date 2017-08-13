@@ -116,14 +116,15 @@ class GestorArticulos{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li>
+			echo '<li id="'.$item["id"].'">
 					<span>
 					<a href="index.php?action=articulos&idBorrar='.$item["id"].'&rutaImagen='.$item["ruta"].'"><i class="fa fa-times btn btn-danger"></i></a>
-					<i class="fa fa-pencil btn btn-primary"></i>	
+					<i class="fa fa-pencil btn btn-primary editarArticulo"></i>	
 					</span>
 					<img src="'.$item["ruta"].'" class="img-thumbnail">
 					<h1>'.$item["titulo"].'</h1>
 					<p>'.$item["introduccion"].'</p>
+					<input type="hidden" value="'.$item["contenido"].'">
 					<a href="#articulo'.$item["id"].'" data-toggle="modal">
 					<button class="btn btn-default">Leer Más</button>
 					</a>
