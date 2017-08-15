@@ -179,3 +179,54 @@ $(".editarArticulo").click(function(){
 })
 
 /*=====  End of EDITAR ARTICULO  ======*/
+
+
+
+/*==============================================
+=            ORDENAR ITEM ARTICULOS            =
+==============================================*/
+
+
+$("#ordenarArticulos").click(function(){
+	
+	$("#ordenarArticulos").hide();
+	$("#guardarOrdenArticulos").show();
+
+	$("#editarArticulo").css({"cursor":"move"});
+	$("#editarArticulo span i").hide();
+	$("#editarArticulo button").hide();
+	$("#editarArticulo img").hide();
+	$("#editarArticulo p").hide();
+	$("#editarArticulo hr").hide();
+	$("#editarArticulo div").remove();
+	$(".bloqueArticulo h1").css({"font-size":"14px","position":"absolute","padding":"10px","top":"-15px"});
+	$(".bloqueArticulo").css({"padding":"2px"});
+	$("#editarArticulo span").html('<i class="glyphicon glyphicon-move"></i>');
+
+	$("body, html").animate({
+
+		scrollTop:$("body").offset().top
+	},500)
+
+	$("#editarArticulo").sortable({
+
+		revert: true,
+		connectWith: ".bloqueArticulo",
+		nadle: ".handleArticle",
+		stop: function (event) {
+			
+		}
+	})
+
+
+	$("#guardarOrdenArticulos").click(function(){
+		
+		$("#guardarOrdenArticulos").hide();
+		$("#ordenarArticulos").show();
+
+	});
+	
+});
+
+/*=====  End of ORDENAR ITEM ARTICULOS  ======*/
+	

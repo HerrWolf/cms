@@ -116,8 +116,8 @@ class GestorArticulos{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li id="'.$item["id"].'">
-					<span>
+			echo '<li id="'.$item["id"].'" class="bloqueArticulo">
+					<span class="handleArticle">
 					<a href="index.php?action=articulos&idBorrar='.$item["id"].'&rutaImagen='.$item["ruta"].'"><i class="fa fa-times btn btn-danger"></i></a>
 					<i class="fa fa-pencil btn btn-primary editarArticulo"></i>	
 					</span>
