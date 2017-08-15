@@ -80,6 +80,39 @@ class GestorArticulosModel{
 
 	
 	/*=====  End of BORRAR ARTICULO DE DB  ======*/
+
+
+
+	/*=============================================
+	=            EDITAR ARTICULO EN DB            =
+	=============================================*/
+	
+	
+	public function editarArticuloModel($datosModel, $tabla){
+		
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo, introduccion = :introduccion, ruta = :ruta, contenido = :contenido WHERE id = :id ");
+
+		$stmt -> bindParam(":titulo", $datosModel["titulo"], PDO::PARAM_STR);
+		$stmt -> bindParam(":introduccion", $datosModel["introduccion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":ruta", $datosModel["ruta"], PDO::PARAM_STR);
+		$stmt -> bindParam(":contenido", $datosModel["contenido"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();	
+	}
+	
+	/*=====  End of EDITAR ARTICULO EN DB  ======*/
+	
 	
 	
 	

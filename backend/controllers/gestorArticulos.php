@@ -188,7 +188,7 @@ class GestorArticulos{
 
 						swal({
 							title: "¡OK!",
-							text: "¡El articulo se a borrado correctamente!",
+							text: "¡El articulo se ha borrado correctamente!",
 							type: "success",
 							confirmButtonText: "Cerrar",
 							closeOnConfirm: false
@@ -207,6 +207,88 @@ class GestorArticulos{
 	}
 	
 	/*=====  End of BORRAR ATICULO DE DB  ======*/
+
+
+
+	/*=======================================
+	=            EDITAR ARTICULO            =
+	=======================================*/
+	
+	
+	public function editarArticuloController(){
+		
+		$ruta = "";
+
+		if (isset($_POST["editarTitulo"])) {
+			
+			if (isset($_FILES["editarImagen"]["tmp_name"])) {
+				
+				$imagen = $_FILES["editarImagen"]["tmp_name"];
+
+				$aleatorio = mt_rand(100,999);
+
+				$ruta = "views/images/articulos/articulo".$aleatorio.".jpg";
+
+				$origen = imagecreatefromjpeg($imagen);
+				
+				$destino = imagecrop($origen, ["x"=>0, "y"=>0, "width"=>800, "height"=>400]);
+
+				imagejpeg($destino, $ruta);
+
+				$borrar = glob("views/images/articulos/temp/*");
+
+				foreach ($borrar as $file) {
+					
+					unlink($file);
+				}
+			}
+
+			if ($ruta == "") {
+			
+				$ruta = $_POST["fotoAntigua"];
+			}
+			else{
+
+				unlink($_POST["fotoAntigua"]);
+			}
+
+			$datosController = array("id"=>$_POST["id"],
+				                     "titulo"=>$_POST["editarTitulo"],
+				                     "introduccion"=>$_POST["editarIntroduccion"],
+				                     "ruta"=>$ruta,
+				                     "contenido"=>$_POST["editarContenido"]);
+
+			$respuesta = GestorArticulosModel::editarArticuloModel($datosController, "articulos");
+
+			if ($respuesta == "ok") {
+				
+				echo '<script>
+
+						swal({
+							title: "¡OK!",
+							text: "¡El articulo se ha actualizado correctamente!",
+							type: "success",
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+							},
+
+						function(isConfirm){
+							if(isConfirm){
+								window.location = "articulos";
+							}
+						});
+				
+					 </script>';
+			}
+			else{
+
+				echo $respuesta;
+			}
+		}
+	}
+
+	/*=====  End of EDITAR ARTICULO  ======*/
+	
 
 				
 }

@@ -96,14 +96,14 @@ $(".editarArticulo").click(function(){
 	introduccion = $("#"+idArticulo).children("p").html();
 	contenido = $("#"+idArticulo).children("input").val();	
 	
-	$("#"+idArticulo).html('<form method="post" enctype="multipart/form-data"><span><input type="submit" class="btn btn-primary pull-right" value="Guardar" style="width:10%; padding:5px 0; margin-top:4px"></span><div id="editarImagen"><input style="display:none" type="file" id="subirNuevaFoto" class="btn btn-default"><div id="nuevaFoto"><span class="fa fa-times cambiarImagen"></span><img src="'+rutaImagen+'" class="img-thumbnail"></div></div><input type="text" value="'+titulo+'" name="editarTitulo"><textarea cols="30" rows="5" name="editarIntroduccion">'+introduccion+'</textarea><textarea name="editarContenido" id="editarContenido" cols="30" rows="10">'+contenido+'</textarea><hr></form>')
+	$("#"+idArticulo).html('<form method="post" enctype="multipart/form-data"><span><input type="submit" class="btn btn-primary pull-right" value="Guardar" style="width:10%; padding:5px 0; margin-top:4px"></span><div id="editarImagen"><input style="display:none" type="file" id="subirNuevaFoto" class="btn btn-default"><div id="nuevaFoto"><span class="fa fa-times cambiarImagen"></span><img src="'+rutaImagen+'" class="img-thumbnail"></div></div><input type="text" value="'+titulo+'" name="editarTitulo"><textarea cols="30" rows="5" name="editarIntroduccion">'+introduccion+'</textarea><textarea name="editarContenido" id="editarContenido" cols="30" rows="10">'+contenido+'</textarea><input type="hidden" value="'+idArticulo+'" name="id"><input type="hidden" value="'+rutaImagen+'" name="fotoAntigua"><hr></form>')
 
 	$(".cambiarImagen").click(function(){
 
 		$(this).hide();
 		
 		$("#subirNuevaFoto").show();
-		$("#subirNuevaFoto").css({"width":"90%"});
+		$("#subirNuevaFoto").css({"width":"80%"});
 		$("#nuevaFoto").html("");
 		$("#subirNuevaFoto").attr("name","editarImagen");
 		$("#subirNuevaFoto").attr("require",true);
