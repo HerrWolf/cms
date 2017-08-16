@@ -186,6 +186,8 @@ $(".editarArticulo").click(function(){
 =            ORDENAR ITEM ARTICULOS            =
 ==============================================*/
 
+var almacenarOrdenId = new Array();
+var ordenItem = new Array();
 
 $("#ordenarArticulos").click(function(){
 	
@@ -214,7 +216,14 @@ $("#ordenarArticulos").click(function(){
 		connectWith: ".bloqueArticulo",
 		nadle: ".handleArticle",
 		stop: function (event) {
-			
+				
+			for(var i = 0; i < $("#editarArticulo li").length; i++){
+
+				almacenarOrdenId[i] = event.target.children[i].id;
+				ordenItem[i] = i+1;
+				
+				
+			}
 		}
 	})
 
@@ -223,6 +232,39 @@ $("#ordenarArticulos").click(function(){
 		
 		$("#guardarOrdenArticulos").hide();
 		$("#ordenarArticulos").show();
+
+		for(var i = 0; i < $("#editarArticulo li").length; i++){
+
+				var actualizarOrden = new FormData();
+				actualizarOrden.append("actualizarOrdenArticulos", almacenarOrdenId[i]);
+				actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+
+				$.ajax({
+
+					url: "views/ajax/gestorArticulos.php",
+					method: "POST",
+					data: actualizarOrden,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(respuesta){
+
+						$("#editarArticulo").html(respuesta);
+						
+						swal({
+							title: "¡OK!",
+							text: "¡El orden se ha actualizado correctamente!",
+							type: "success",
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false},
+							function(isConfirm){
+								if (isConfirm){
+									window.location = "articulos";
+								}
+							});
+					}
+				})
+			}
 
 	});
 	

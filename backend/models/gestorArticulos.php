@@ -112,6 +112,63 @@ class GestorArticulosModel{
 	}
 	
 	/*=====  End of EDITAR ARTICULO EN DB  ======*/
+
+
+
+	/*==============================================
+	=            ACTUALIZAR ORDEN EN DB            =
+	==============================================*/
+	
+	
+
+	public function actualizarOrdenModel($datos, $tabla){
+		
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
+
+		$stmt -> bindParam(":orden", $datos["ordenItem"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["ordenArticulos"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN EN DB  ======*/
+
+
+
+	/*=========================================
+	=            SELECCIONAR ORDEN            =
+	=========================================*/
+	
+	
+	public function seleccionarOrdenModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT id, titulo, introduccion, ruta, contenido FROM $tabla ORDER BY orden ASC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+
+	}
+	
+	/*=====  End of SELECCIONAR ORDEN  ======*/
+	
+	
+
+
+
+
 	
 	
 	
