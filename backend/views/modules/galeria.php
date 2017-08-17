@@ -22,10 +22,10 @@ GALERIA ADMINISTRABLE
 
 <hr>
 
-<p><span class="fa fa-arrow-down"></span>  Arrastra aquí tu imagen, tamaño recomendado: 1600px * 600px</p>
+<p><span class="fa fa-arrow-down"></span>  Arrastra aquí tu imagen, tamaño recomendado: 1024px * 768px</p>
 	
 	<ul id="lightbox">
-		<li>
+		<!-- <li>
 			<span class="fa fa-times"></span>
 			<a rel="grupo" href="images/galeria/photo01.jpg">
 			<img src="views/images/galeria/photo01.jpg">
@@ -79,7 +79,7 @@ GALERIA ADMINISTRABLE
 			<a rel="grupo" href="images/galeria/photo04.jpg">
 			<img src="views/images/galeria/photo04.jpg">
 			</a>		
-		</li>
+		</li> -->
 	</ul>
 
 	<button class="btn btn-warning pull-right" style="margin:10px 30px">Ordenar Imágenes</button>
