@@ -4,12 +4,12 @@
 
 		<ul>
 
-      <?php 
+	      <?php 
 
-        $slide = new Slide();
-        $slide -> seleccionarSlideController();
+	        $slide = new Slide();
+	        $slide -> seleccionarSlideController();
 
-      ?>	       
+	      ?>	       
 
 		</ul>
 

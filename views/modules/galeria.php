@@ -7,7 +7,14 @@
 	<hr>
 
 	<ul>
-			<li>
+
+		<?php 
+
+	        $galeria = new Galeria();
+	        $galeria -> seleccionarGaleriaController();
+
+	    ?>
+			<!-- <li>
 				<a rel="grupo" href="views/images/galeria/photo01.jpg">
 				<img src="views/images/galeria/photo01.jpg">
 				</a>
@@ -64,7 +71,7 @@
 				<a rel="grupo" href="views/images/galeria/photo02.jpg">
 				<img src="views/images/galeria/photo02.jpg">
 				</a>
-			</li>
+			</li> -->
 	</ul>
 
 </div>
