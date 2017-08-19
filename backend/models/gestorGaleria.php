@@ -100,6 +100,55 @@ class GestorGaleriaModel{
 	}
 	
 	/*=====  End of ELIMINAR ITEM DE LA GALERIA  ======*/
+
+
+
+	/*========================================
+	=            ACTUALIZAR ORDEN            =
+	========================================*/
+	
+	
+	public function actualizarOrdenModel($datos, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
+
+		$stmt -> bindParam(":orden", $datos["ordenItem"], PDO::PARAM_INT);
+		$stmt -> bindParam(":id", $datos["ordenGaleria"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();	
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN  ======*/
+
+
+
+	/*=========================================
+	=            SELECCIONAR ORDEN            =
+	=========================================*/
+	
+	
+	public function seleccionarOrdenModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT id, ruta FROM $tabla ORDER BY orden ASC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of SELECCIONAR ORDEN  ======*/
 	
 	
 }

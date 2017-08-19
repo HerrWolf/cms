@@ -149,6 +149,13 @@ $("#lightbox").on("drop", function(e){
 
 /*=====  End of SUBIR MULTIPLES IMAGENES  ======*/
 
+
+
+/*=============================================
+=            ELIMINAR ITEM GALERIA            =
+=============================================*/
+
+
 $(".eliminarFoto").click(function(){
 
 	if ($(".eliminarFoto").length == 1){
@@ -184,3 +191,92 @@ $(".eliminarFoto").click(function(){
 	});
 
 });
+
+/*=====  End of ELIMINAR ITEM GALERIA  ======*/
+
+
+
+/*================================================
+=            ORDENAR IMAGENES GALERIA            =
+================================================*/
+
+var almacenarOrdenId = new Array();
+var ordenItem = new Array();
+
+$("#ordenarGaleria").click(function(){
+
+
+	//ocultar boton ordenar
+	$("#ordenarGaleria").hide();
+	//mostrar boton guardar
+	$("#guardarGaleria").show();
+
+	// cambiar el cursor a mover despues de dar click en el boton ordenar
+	$("#lightbox").css({"cursor":"move"});
+	//ocultar los span de eliminar imagen
+	$("#lightbox span").hide();
+
+	//iniciamos la funcion sortable de jqquery UI
+	$("#lightbox").sortable({
+		//esto sirve para que la imagen regrese si se pone en un lugar no valido
+		revert: true,
+		//esto sirve para que la imagen se enganche a una posicion en el <li>
+		connectWith: ".bloqueGaleria",
+		//esto sirve para poder arrastar la imagen
+		handle: ".handleImg",
+		stop: function(event){
+
+			for (var i=0; i < $("#lightbox li").length; i++) {
+				almacenarOrdenId[i] = event.target.children[i].id;
+				ordenItem[i] = i+1;
+				
+			}
+		}
+	});
+});
+
+$("#guardarGaleria").click(function(){
+
+
+	//ocultar boton guardar
+	$("#guardarGaleria").hide();
+	//mostrar boton ordenar
+	$("#ordenarGaleria").show();
+
+	for (var i=0; i < $("#lightbox li").length; i++) {
+
+		var actualizarOrden = new FormData();
+		actualizarOrden.append("actualizarOrdenGaleria", almacenarOrdenId[i]);
+		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+
+		$.ajax({
+
+			url: 'views/ajax/gestorGaleria.php',
+			type: 'POST',
+			data: actualizarOrden,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(respuesta){
+				
+				$("#lightbox").html(respuesta);
+
+				swal({
+						title: "¡OK!",
+						text: "¡El orden se ha actualizaco correctamente!",
+						type: "success",
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false
+					},
+
+					function(isConfirm){
+						if(isConfirm){
+							window.location = "galeria";
+						}
+					});				
+			}
+		})
+	}
+});
+
+/*=====  End of ORDENAR IMAGENES GALERIA  ======*/

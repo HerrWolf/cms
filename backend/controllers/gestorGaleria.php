@@ -62,7 +62,7 @@ class GestorGaleria{
 
 		foreach ($respuesta as $row => $item) {
 			
-			echo '<li id="'.$item["id"].'"><span class="fa fa-times eliminarFoto" ruta="'.$item["ruta"].'"></span><a rel="grupo" href="'.substr($item["ruta"],6).'"><img src="'.substr($item["ruta"],6).'"></a></li>';
+			echo '<li id="'.$item["id"].'" class="bloqueGaleria"><span class="fa fa-times eliminarFoto" ruta="'.$item["ruta"].'"></span><a rel="grupo" href="'.substr($item["ruta"],6).'"><img src="'.substr($item["ruta"],6).'" class="handleImg"></a></li>';
 		}
 
 	}
@@ -86,6 +86,27 @@ class GestorGaleria{
 	}
 	
 	/*=====  End of ELIMINAR ITEM DE GALERIA  ======*/
+
+
+
+	/*========================================
+	=            ACTUALIZAR ORDEN            =
+	========================================*/
+	
+	
+	public function actualizarOrdenController($datos){
+		
+		GestorGaleriaModel::actualizarOrdenModel($datos, "galeria");
+		
+		$respuesta = GestorGaleriaModel::seleccionarOrdenModel("galeria");
+
+		foreach ($respuesta as $row => $item) {
+			echo '<li id="'.$item["id"].'" class="bloqueGaleria"><span class="fa fa-times eliminarFoto" ruta="'.$item["ruta"].'"></span><a rel="grupo" href="'.substr($item["ruta"],6).'"><img src="'.substr($item["ruta"],6).'" class="handleImg"></a></li>';
+		}
+	}
+	
+	/*=====  End of ACTUALIZAR ORDEN  ======*/
+	
 	
 	
 }
