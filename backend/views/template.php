@@ -63,6 +63,7 @@
 	<script src="views/js/gestorSlide.js"></script>
 	<script src="views/js/gestorArticulos.js"></script>
 	<script src="views/js/gestorGaleria.js"></script>
+	<script src="views/js/gestorVideo.js"></script>
 	
 </body>
 

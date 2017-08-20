@@ -28,8 +28,10 @@ VIDEOS ADMINISTRABLE
 
 </form>
 
+<p>Subir solo videos en formato MP4 y que no exceda el peso de 50MB.</p>
+
 <ul id="galeriaVideo">
-	<li>
+	<!-- <li>
 		<span class="fa fa-times"></span>
 		<video controls>
 			<source src="views/videos/video01.mp4" type="video/mp4">
@@ -55,7 +57,7 @@ VIDEOS ADMINISTRABLE
 		<video controls>
 			<source src="views/videos/video04.mp4" type="video/mp4">
 			</video>	
-	</li>
+	</li> -->
 
 </ul>
 
