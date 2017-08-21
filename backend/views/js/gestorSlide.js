@@ -155,6 +155,7 @@ $(".eliminarSlide").click(function() {
 	idSlide = $(this).parent().attr("id");
 	rutaSlide = $(this).attr("ruta");
 
+	//eliminar el <li> que contiene la imagen
 	$(this).parent().remove();
 	$("#item"+idSlide).remove();
 
