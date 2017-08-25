@@ -46,16 +46,23 @@
     		</li>
 			</ol>
 
-			<form>
-			    <input type="text" class="form-control"  placeholder="Nombre">
+			<form method="post" onsubmit="return validarMensaje()">
+			    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
 
-			    <input type="email" class="form-control" placeholder="Email">
+			    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
 
-			    <textarea name="" id="" cols="30" rows="10" placeholder="Contenido del Mensaje" class="form-control"></textarea>
+			    <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Contenido del Mensaje" class="form-control" required></textarea>
 
 			 
-			  	<input type="button" class="btn btn-default" value="Enviar">
+			  	<input type="submit" class="btn btn-default" value="Enviar">
 		</form>
+
+		<?php
+
+		$mensajes = new MensajesController();
+		$mensajes -> registroMensajesController();
+
+		?>
 						
 
 	</div>

@@ -101,8 +101,57 @@ class GestorVideosModel{
 	}
 	
 	/*=====  End of ELIMINAR VIDEO  ======*/
+
+
+
+	/*========================================
+	=            ACTUALICAR ORDEN            =
+	========================================*/
 	
 	
+	public function actualizarOrdenModel($datos, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
+
+		$stmt -> bindParam(":orden", $datos["ordenItem"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["ordenVideo"], PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();	
+	}
 	
+	/*=====  End of ACTUALICAR ORDEN  ======*/
+
+
+
+	/*=========================================
+	=            SELECCIONAR ORDEN            =
+	=========================================*/
+	
+	
+	public function seleccionarOrdenModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT id, ruta FROM $tabla ORDER BY orden ASC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of SELECCIONAR ORDEN  ======*/
+	
+	
+
 	
 }

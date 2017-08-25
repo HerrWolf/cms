@@ -143,3 +143,92 @@ $(".eliminarVideo").click(function(){
 
 /*=====  End of ELIMINAR VIDEO  ======*/
 
+
+
+/*======================================
+=            ORDENAR VIDEOS            =
+======================================*/
+
+var almacenarOrdenId = new Array();
+var ordenItem = new Array();
+
+$("#ordenarVideo").click(function(){
+	
+	//ocultar boton ordenar
+	$("#ordenarVideo").hide();
+	//mostrar boton guardar
+	$("#guardarVideo").show();
+
+	//Cambiar apariencia dl cursor
+	$("#galeriaVideo").css({"cursor":"move"});
+	//ocultar los span de eliminar imagen
+	$("#galeriaVideo span").hide();
+
+	$("#galeriaVideo").sortable({
+		//esto sirve para que la imagen regrese si se pone en un lugar no valido
+		revert: true,
+		//esto sirve para que la imagen se enganche a una posicion en el <li>
+		connectWith: ".bloqueVideo",
+		//esto sirve para poder arrastar la imagen
+		handle: ".handleVideo",
+		stop: function(event){
+
+			for (var i=0; i < $("#galeriaVideo li").length; i++) {
+				almacenarOrdenId[i] = event.target.children[i].id;
+				ordenItem[i] = i+1;
+				
+			}
+		}
+	});
+
+
+})
+
+$("#guardarVideo").click(function (){
+	
+	//ocultar boton guardar
+	$("#guardarVideo").hide();
+	//mostrar boton ordenar
+	$("#ordenarVideo").show();
+
+	for (var i=0; i < $("#galeriaVideo li").length; i++) {
+
+		var actualizarOrden = new FormData();
+		actualizarOrden.append("actualizarOrdenVideo", almacenarOrdenId[i]);
+		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+
+		$.ajax({
+
+			url: 'views/ajax/gestorVideos.php',
+			type: 'POST',
+			data: actualizarOrden,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(respuesta){
+				
+				$("#galeriaVideo").html(respuesta);
+
+				swal({
+						title: "¡OK!",
+						text: "¡El orden se ha actualizaco correctamente!",
+						type: "success",
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false
+					},
+
+					function(isConfirm){
+						if(isConfirm){
+							window.location = "videos";
+						}
+					});				
+			}
+		})
+	}
+
+
+})
+
+/*=====  End of ORDENAR VIDEOS  ======*/
+
+
