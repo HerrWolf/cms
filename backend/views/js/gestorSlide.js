@@ -82,7 +82,7 @@ $("#columnasSlide").on("drop", function(e){
 		$.ajax({
 
 			url: 'views/ajax/gestorSlide.php',
-			type: 'POST',
+			method: 'POST',
 			data: datos,
 			cache: false,
 			contentType: false,
@@ -168,7 +168,7 @@ $(".eliminarSlide").click(function() {
 	$.ajax({
 
 		url: 'views/ajax/gestorSlide.php',
-		type: 'POST',
+		method: 'POST',
 		data: borrarItem,
 		cache: false,
 		contentType: false,
@@ -218,7 +218,7 @@ $(".editarSlide").click(function(){
 		$.ajax({
 
 			url: 'views/ajax/gestorSlide.php',
-			type: 'POST',
+			method: 'POST',
 			data: actualizarSlide,
 			cache: false,
 			contentType: false,
@@ -305,7 +305,7 @@ $("#guardarSlide").click(function(){
 		$.ajax({
 
 			url: 'views/ajax/gestorSlide.php',
-			type: 'POST',
+			method: 'POST',
 			data: actualizarOrden,
 			cache: false,
 			contentType: false,

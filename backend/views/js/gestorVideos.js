@@ -200,7 +200,7 @@ $("#guardarVideo").click(function (){
 		$.ajax({
 
 			url: 'views/ajax/gestorVideos.php',
-			type: 'POST',
+			method: 'POST',
 			data: actualizarOrden,
 			cache: false,
 			contentType: false,

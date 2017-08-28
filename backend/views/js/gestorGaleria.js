@@ -98,7 +98,7 @@ $("#lightbox").on("drop", function(e){
 			$.ajax({
 
 				url: 'views/ajax/gestorGaleria.php',
-				type: 'POST',
+				method: 'POST',
 				data: datos,
 				cache: false,
 				contentType: false,
@@ -176,7 +176,7 @@ $(".eliminarFoto").click(function(){
 	$.ajax({
 
 		url: 'views/ajax/gestorGaleria.php',
-		type: 'POST',
+		method: 'POST',
 		data: borrarItem,
 		cache: false,
 		contentType: false,
@@ -252,7 +252,7 @@ $("#guardarGaleria").click(function(){
 		$.ajax({
 
 			url: 'views/ajax/gestorGaleria.php',
-			type: 'POST',
+			method: 'POST',
 			data: actualizarOrden,
 			cache: false,
 			contentType: false,

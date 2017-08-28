@@ -24,12 +24,23 @@ class MensajesController{
 
 				$envio = mail($correoDestino, $asunto, $mensaje, $cabecera);
 
-				#ALMACENAR MENSAJE EN DB
 				$datosController = array("nombre"=>$_POST["nombre"],
-						                     "email"=>$_POST["email"],
-						                     "mensaje"=>$_POST["mensaje"]);
+						                 "email"=>$_POST["email"],
+						                 "mensaje"=>$_POST["mensaje"]);
+
+				#ALMACENAR SUSCRIPTORES EN DB
+
+				$datosSuscriptor = $_POST["email"];
+
+				$revisarSuscriptor = MensajesModel::revisarSuscriptorModel($datosSuscriptor, "suscriptores");
+
+				if (count($revisarSuscriptor["email"]) == 0){
+					
+					MensajesModel::registroSuscriptoresModel($datosController, "suscriptores");
+				}
 
 
+				#ALMACENAR MENSAJE EN DB
 				$respuesta = MensajesModel::registroMensajesModel($datosController, "mensajes");
 
 				if ($envio == true && $respuesta == "ok"){
