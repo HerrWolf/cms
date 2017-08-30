@@ -11,14 +11,24 @@
 			<li  style="background: #333">
 				<a href="mensajes" style="color: #fff">
       			<i class="fa fa-envelope"></i> 
-      			<span>1</span> 
+      			<?php 
+
+      			$revisarMensajes = new MensajesController();
+      			$revisarMensajes -> mensajesSinRevisarController();
+
+      			?> 
     			</a>
 			</li>
 
 			<li  style="background: #333">
 				<a href="suscriptores" style="color: #fff">
       			<i class="fa fa-bell"></i>  
-      			<span>1</span>
+      			<?php 
+
+      			$revisarSuscriptores = new SuscriptoresController();
+      			$revisarSuscriptores -> suscriptoresSinRevisarController();
+
+      			?> 
     			</a>
 			</li>
 			

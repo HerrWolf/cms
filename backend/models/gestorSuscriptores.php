@@ -70,6 +70,27 @@ class SuscriptoresModel{
 	}
 	
 	/*=====  End of IMPRIMIR SUSCRIPTORES PDF  ======*/
+
+
+
+	/*===================================================
+	=            REVISAR SUSCRIPTORES NUEVOS            =
+	===================================================*/
+	
+	
+	public function suscriptoresSinRevisarModel($tabla){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT revision FROM $tabla");
+		
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+	}
+	
+	/*=====  End of REVISAR SUSCRIPTORES NUEVOS  ======*/
+	
 	
 	
 	

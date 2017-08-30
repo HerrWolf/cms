@@ -82,6 +82,34 @@ class SuscriptoresController{
 	}
 	
 	/*=====  End of IMPRIMIR SUSCRIPTORES PDF  ======*/
+
+
+
+	/*===================================================
+	=            REVISAR SUSCRIPTORES NUEVOS            =
+	===================================================*/
+	
+	
+	public function suscriptoresSinRevisarController(){
+		
+		$respuesta = SuscriptoresModel::suscriptoresSinRevisarModel("suscriptores");
+
+		$sumaRevision = 0;
+
+		foreach ($respuesta as $row => $item) {
+			
+			if ($item["revision"] == 0) {
+				
+				++$sumaRevision;
+
+				echo '<span>'.$sumaRevision.'</span>';
+			}
+
+		}
+	}
+	
+	/*=====  End of REVISAR SUSCRIPTORES NUEVOS  ======*/
+	
 	
 	
 	

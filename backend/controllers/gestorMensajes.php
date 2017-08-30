@@ -230,6 +230,57 @@ class MensajesController{
 	
 	/*=====  End of ENVIAR CORREO MASIVO  ======*/
 
+
+
+	/*============================================
+	=            MENSAJES SIN REVISAR            =
+	============================================*/
+	
+	
+	public function mensajesSinRevisarController(){
+		
+		$respuesta = MensajesModel::mensajesSinRevisarModel("mensajes");
+
+		$sumaRevision = 0;
+
+		foreach ($respuesta as $row => $item) {
+			
+			if ($item["revision"] == 0) {
+				
+				++$sumaRevision;
+
+				echo '<span>'.$sumaRevision.'</span>';
+			}
+
+
+		}
+
+
+	}
+	
+	/*=====  End of MENSAJES SIN REVISAR  ======*/
+
+
+
+	/*======================================================
+	=            MARCAR MENSAJES COMO REVISADOS            =
+	======================================================*/
+	
+	
+	public function mensajesRevisadosController($datos){
+		
+		$datosController = $datos;
+		
+		$respuesta = MensajesModel::mensajesRevisadosModel($datosController, "mensajes");
+
+		echo $respuesta;
+	}
+	
+	/*=====  End of MARCAR MENSAJES COMO REVISADOS  ======*/
+	
+
+
+
 		
 	
 			
