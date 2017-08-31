@@ -90,6 +90,35 @@ class SuscriptoresModel{
 	}
 	
 	/*=====  End of REVISAR SUSCRIPTORES NUEVOS  ======*/
+
+
+
+	/*==========================================================
+	=            MARCAR SUSCRIPTORES COMO REVISADOS            =
+	==========================================================*/
+	
+	
+	public function suscriptoresRevisadosModel($datosModel, $tabla){
+		
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET revision = :revision");
+		
+		$stmt -> bindParam(":revision", $datosModel, PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+			
+			return "ok";
+		}
+
+		else{
+
+			"error";
+		}
+
+		$stmt->close();
+	}
+	
+	/*=====  End of MARCAR SUSCRIPTORES COMO REVISADOS  ======*/
+	
 	
 	
 	

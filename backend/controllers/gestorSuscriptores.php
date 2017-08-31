@@ -109,6 +109,25 @@ class SuscriptoresController{
 	}
 	
 	/*=====  End of REVISAR SUSCRIPTORES NUEVOS  ======*/
+
+
+
+	/*==========================================================
+	=            MARCAR SUSCRIPTORES COMO REVISADOS            =
+	==========================================================*/
+	
+	
+	public function suscriptoresRevisadosController($datos){
+		
+		$datosController = $datos;
+		
+		$respuesta = SuscriptoresModel::suscriptoresRevisadosModel($datosController, "suscriptores");
+
+		echo $respuesta;
+	}
+	
+	/*=====  End of MARCAR SUSCRIPTORES COMO REVISADOS  ======*/
+	
 	
 	
 	

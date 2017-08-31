@@ -55,7 +55,7 @@ $(window).load(function(){
 
   var datos = new FormData();
 
-  datos.append("revisionMensajes",1);
+  datos.append("revisionSuscriptores",1);
 
   $.ajax({
 
