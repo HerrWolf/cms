@@ -11,11 +11,11 @@ class Ingreso{
 			if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["usuarioIngreso"] ) &&
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["passwordIngreso"] )) {
 
-				#$encriptar = crypt($_POST["passwordIngreso"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				$encriptar = crypt($_POST["passwordIngreso"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 				$datosController = array(
 				"usuario" => $_POST["usuarioIngreso"],
-				"password" => $_POST["passwordIngreso"] 
+				"password" => $encriptar 
 				);
 
 				$respuesta = IngresoModels::ingresoModel($datosController, "usuarios");
@@ -23,11 +23,14 @@ class Ingreso{
 				#control de intentos de login
 				$intentos = $respuesta["intentos"];
 				$usuarioActual = $_POST["usuarioIngreso"];
+				$emailActual = $respuesta["email"];
+				$photoActual = $respuesta["photo"];
+				$rolActual = $respuesta["rol"];
 				$maximoIntentos = 2;
 
 				if ($intentos < $maximoIntentos) {
 
-					if($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $_POST["passwordIngreso"]){
+					if($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $encriptar){
 
 						$intentos = 0;
 
@@ -38,6 +41,11 @@ class Ingreso{
 						session_start();
 						$_SESSION["validar"] = true;
 						$_SESSION["usuario"] = $usuarioActual;
+						$_SESSION["id"] = $respuesta["id"];
+						$_SESSION["password"] = $respuesta["password"];
+						$_SESSION["email"] = $emailActual;
+						$_SESSION["photo"] = $photoActual;
+						$_SESSION["rol"] = $rolActual;
 
 						header("location: inicio");	
 					}
